@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+    </div>
+    <div id="app-2">
+      <span v-bind:title="message">
+        鼠标悬停几秒钟查看此处动态绑定的提示信息！
+      </span>
+    </div>
+    <div id="app-3">
+      <p v-if="seen">现在你看到我了</p>
+    </div>
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">反转消息</button>
+    </div>
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+    <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in items"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+        ></todo-item>
+      </ol>
+    </div>
+    <div id="example-1">
+      <p>Original message: "{{ message }}"</p>
+      <p>Computed reversed message: "{{ reversedMessage }}"</p>
+    </div>
+    <div id="example-2">
+      <p>{{ firstName }}</p>
+      <p>{{ lastName }}</p>
+      <p>{{ fullName1 }}</p>
+      <p>{{ fullName2 }}</p>
+    </div>
+    <div id="example-3">
+      <p>
+        Ask a yes/no question:
+        <input v-model="question">
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+    <div id="example-4">
+      <div class="test" :class="classObject">haha</div>
+    </div>
+    <div id="example-5">
+      <div v-for="(value, name, index) in object" :key="index">
+        {{ index }}. {{ name }}: {{ value }}
+      </div>
+    </div>
+    <div id="example-6">
+      <form v-on:submit.prevent="addNewTodo">
+        <label for="new-todo">Add a todo</label>
+        <input
+          v-model="newTodoText"
+          id="new-todo"
+          placeholder="E.g. Feed the cat"
+        >
+        <button>Add</button>
+      </form>
+      <ul>
+        <li
+          is="todo-item"
+          v-for="(todo, index) in todos"
+          v-bind:key="todo.id"
+          v-bind:title="todo.title"
+          v-on:remove="todos.splice(index, 1)"
+        ></li>
+      </ul>
+    </div>
+    <div id="example-7">
+      <p>{{name}}</p>
+      <button v-on:click="sayNone">Say none</button>
+      <button v-on:click="say('hi')">Say hi</button>
+      <button v-on:click="say('what')">Say what</button>
+    </div>
+    <div id="example-8">
+      <div :style="{ height: '100px', overflow: 'scroll' }" v-on:scroll.passive="throttleScroll">
+        <div v-on:click="doThis">
+          <a v-on:click.stop="doThis">A</a>
+        </div>
+        <form v-on:submit.prevent="doThis">
+          <input type="submit" />
+          <input type="image" />
+          <input type="text" />
+          <button>Add</button>
+        </form>
+        <a v-on:click.stop.prevent="doThis">B</a>
+        <div v-on:click.capture="doThat">
+          <a v-on:click="doThis">C</a>
+        </div>
+        <div :style="{ width: '100px', border: '1px solid red' }" v-on:click="doThis">
+          <div :style="{ width: '50px', border: '1px solid green' }" v-on:click.self="doThat">
+            <div :style="{ width: '20px', border: '1px solid blue' }" v-on:click.self="doDoDo">
+              D
+            </div>
+          </div>
+        </div>
+        <a v-on:click.once="doThis">E</a>
+      </div>
+      <div v-on:click.meta.exact="doThis">F</div>
+      <div v-on:click.exact="doThis">G</div>
+      <div v-on:click.left="doThis">H</div>
+      <div v-on:click.right="doThis">I</div>
+      <div v-on:click.middle="doThis">J</div>
+    </div>
+    <div id="example-9">
+      <form @submit.prevent>
+        <div>
+          <label for="name">姓名</label>
+          <input id="name" type="text" v-model="name" placeholder="姓名" />
+        </div>
+        <div>
+          <label for="desc">描述</label>
+          <textarea id="desc" v-model="description" placeholder="描述"></textarea>
+        </div>
+        <div>
+          <label>状况</label>
+          <input type="checkbox" id="a" value="a" v-model="options" />
+          <label for="a">是否成年</label>
+          <input type="checkbox" id="b" value="b" v-model="options" />
+          <label for="b">是否工作</label>
+          <input type="checkbox" id="c" value="c" v-model="options" />
+          <label for="c">是否结婚</label>
+          <input type="checkbox" id="d" value="d" v-model="options" />
+          <label for="d">是否患病</label>
+        </div>
+        <div>
+          <label>性别</label>
+          <input type="radio" id="man" value="man" v-model="sex" />
+          <label for="man">男</label>
+          <input type="radio" id="women" value="women" v-model="sex" />
+          <label for="women">女</label>
+        </div>
+        <div>
+          <label>考核</label>
+          <select v-model="kpi">
+            <option disabled value="">请选择</option>
+            <option key="5" value="5">5星</option>
+            <option key="4" value="4">4星</option>
+            <option key="3" value="3">3星</option>
+            <option key="2" value="2">2星</option>
+            <option key="1" value="1">1星</option>
+          </select>
+        </div>
+        <div>
+          <label>爱好</label>
+          <select v-model="interest" multiple style="width: 50px; height: 100px">
+            <option key="5" value="5">游戏</option>
+            <option key="4" value="4">唱歌</option>
+            <option key="3" value="3">篮球</option>
+            <option key="2" value="2">足球</option>
+            <option key="1" value="1">电影</option>
+          </select>
+        </div>
+      </form>
+      <div>
+        我是{{name}}，性别：{{ sex === 'man' ? '男' : '女' }}，
+        <span v-for="opt in options">
+          <template v-if="opt === 'a'">已成年，</template>
+          <template v-if="opt === 'b'">有工作，</template>
+          <template v-if="opt === 'c'">已结婚，</template>
+          <template v-if="opt === 'd'">身体健康，</template>
+        </span>
+        <span v-if="kpi">最近一次考核为{{kpi}}，</span>
+        <span v-if="interest.length > 0">爱好：</span>
+        <span v-for="int in interest">
+          <template v-if="int === '1'">电影，</template>
+          <template v-if="int === '2'">足球，</template>
+          <template v-if="int === '3'">篮球，</template>
+          <template v-if="int === '4'">唱歌，</template>
+          <template v-if="int === '5'">游戏，</template>
+        </span>
+        {{description}}
+      </div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tween.js@16.3.4"></script>
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@3.5.1" rel="stylesheet" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+  </head>
+  <body>
+    <div id="root">
+      <button @click="show = !show">
+        toggle
+      </button>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated tada"
+        leave-active-class="animated bounceOutRight"
+      >
+        <p v-if="show" style="width: 100px;">test</p>
+      </transition>
+    </div>
+    <div id="js-ani">
+      <button @click="show = !show">
+        toggle
+      </button>
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @leave="leave"
+        :css="false"
+      >
+        <p v-if="show">
+          Demo
+        </p>
+      </transition>
+    </div>
+    <div id="multi-ani">
+      <button @click="add" key="add">
+        Add
+      </button>
+      <button @click="del" key="del">
+        Del
+      </button>
+      <transition>
+        <table v-if="items.length > 0">
+          <tr>
+            <td>Name</td>
+            <td>Age</td>
+          </tr>
+          <tr v-for="item in items">
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+          </tr>
+        </table>
+        <div v-else>Sorry，nothing!</div>
+      </transition>
+    </div>
+    <div id="mode-ani">
+      <transition mode="out-in">
+        <button v-if="show" @click="show = !show" key="on">On</button>
+        <button v-else @click="show = !show" key="off">Off</button>
+      </transition>
+      <button @click="view = 'component-a'">a</button>
+      <button @click="view = 'component-b'">b</button>
+      <transition mode="out-in">
+        <component :is="view" text="haha"></component>
+      </transition>
+    </div>
+    <div id="list-demo" class="demo">
+      <button @click="add">Add</button>
+      <button @click="remove">Remove</button>
+      <transition-group name="list" tag="p">
+        <span v-for="item in items" :key="item" class="list-item">
+          {{item}}
+        </span>
+      </transition-group>
+    </div>
+    <div id="tween-demo">
+      <input v-model.number="number" type="number" step="20" />
+      <ani-integer :value="number"></ani-integer>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

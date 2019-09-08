@@ -1,0 +1,12 @@
+.test {
+  margin-left: 10px;
+  font-size: 30px;
+}
+
+.active {
+  margin-left: 100px;
+}
+
+.text-danger {
+  color: red;
+}
