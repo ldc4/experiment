@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <h1>Hello App!</h1>
+      <p>
+        <router-link to="/user/weedust">动态路由</router-link>
+        <router-link to="/parent/children">嵌套路由</router-link>
+        <router-link to="/redirect">重定向</router-link>
+        <router-link :to="{ name: 'haha', params: { id: '22' } }">命名路由</router-link>
+        <router-link to="/multi/haha">命名视图</router-link>
+        <router-link to="/props/weedust">属性传参</router-link>
+      </p>
+      <router-view></router-view>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
