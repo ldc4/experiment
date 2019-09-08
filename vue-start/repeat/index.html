@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+  </head>
+  <body>
+    <div id="mixin">
+      <button @click="test">{{a}}-{{b}}-{{c}}</button>
+    </div>
+    <div id="directive">
+      <div id="directive-demo" v-demo:foo.a.b="msg"></div>
+    </div>
+    <div id="render">
+      <anchored-heading :level="3">Hello world!</anchored-heading>
+      <div v-for="i in 100">111111111111</div>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>

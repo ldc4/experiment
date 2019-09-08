@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="index.css"/>
+  </head>
+  <body>
+    <div id="root">
+      <div :style="{ fontSize: xSize + 'em' }">
+        <a-b-c x-x="1" y="a" z="?" v-model="haha" @large="xSize += 1" @focus.native="">
+          <a-b-c v-for="item in items" :key="item.x" :x-x="item.x" :y="item.y" :z="item.z"></a-b-c>
+        </a-b-c>
+      </div>
+      <div>
+        <button @click="changeTab('a-b-c')">a-b-c</button>
+        <button @click="changeTab('b-c-d')">b-c-d</button>
+        <keep-alive>
+          <component :is="current" :x-x="1" :y="2" :z="3"></component>
+        </keep-alive>
+      </div>
+      <a-b-c v-bind="post" v-model="haha" @large="xSize += 1"></a-b-c>
+      <validate-comp :prop-a="1" :prop-b="'2'" :prop-c="'a'" :prop-f="'success'" :author="person"></validate-comp>
+      <hr/>
+      <event-demo @focus="onFocus" label="haha" :value="1"></event-demo>
+      <slot-demo>
+        <template v-slot:header>
+          <h1>title</h1>
+        </template>
+        <template v-slot:default>
+          <p>main</p>
+        </template>
+        <template v-slot:footer>
+          <span>footer</span>
+        </template>
+        <p>body</p>
+      </slot-demo>
+      <slot-parent label="yoyo"></slot-parent>
+      <async-example></async-example>
+      <ref-demo></ref-demo>
+    </div>
+    <script src="./index.js"></script>
+  </body>
+</html>
