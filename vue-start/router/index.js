@@ -194,7 +194,17 @@ function c() {
       }
     ],
     scrollBehavior (to, from, savedPosition) {
-      return { x: 0, y: 0 }
+      // if (savedPosition) {
+      //   return savedPosition;
+      // } else {
+      //   return { x: 0, y: 0 };
+      // }
+      // return { x: 0, y: 0 };
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve({ x: 0, y: 0 })
+        }, 2000)
+      })
     }
   });
   router.beforeEach((to, from, next) => {
