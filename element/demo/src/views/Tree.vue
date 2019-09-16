@@ -47,13 +47,17 @@ export default {
     handleNodeClick(data) {
       console.log(data);
     },
-    toggleExpand(value) {
+    async toggleExpand(value) {
       console.log(this.$refs.tree.store)
       const startTime = Date.now();
       const { nodesMap } = this.$refs.tree.store;
       let count = 0;
       for(let key in nodesMap) {
+        console.log(key)
         count++;
+        if (count % 10 === 0){
+          await new Promise((resolve) => { requestAnimationFrame(() => { resolve() }) })
+        }
         nodesMap[key].expanded = value;
       }
       const endTime = Date.now();
