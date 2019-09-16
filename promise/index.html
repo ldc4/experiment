@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise</title>
+</head>
+<body>
+  <script>
+    const a = false;
+    const error = true;
+    const p = new Promise((resolve, reject) => {
+      if (error) {
+        throw new Error('err');
+      }
+      if (a) {
+        resolve('suc');
+      } else {
+        reject('fail');
+      }
+    })
+    p.then((sucData) => {
+      console.log(sucData);
+    }, (failData) => {
+      console.log(failData);
+    }).catch((err) => {
+      console.log(err);
+    });
+  </script>
+</body>
+</html>
