@@ -211,3 +211,48 @@ const app = new Vue({
   }
 });
 
+
+// 子组件的computed中依赖属性变化，会触发更新么？ 会
+
+Vue.component('demo1', {
+  props: ['a'],
+  model: {
+    prop: 'a',
+    event: 'update'
+  },
+  computed: {
+    test: function() {
+      console.log('update')
+      return this.a + 'px';
+    }
+  },
+  watch: {
+    a(newValue, oldValue) {
+      console.log(newValue, oldValue)
+    }
+  },
+  methods: {
+
+  },
+  template: `
+    <div>
+      {{test}}
+    </div>
+  `,
+});
+
+const arr = [1, 2, 3];
+
+const d1 = new Vue({
+  el: '#demo1',
+  data: {
+    a: arr,
+  },
+  mounted() {
+    const that = this;
+    setTimeout(() => {
+      arr.push(4);
+      that.a = arr
+    }, 3000)
+  }
+});
