@@ -25,6 +25,11 @@ export default new Router({
       path: '/tree',
       name: 'tree',
       component: () => import(/* webpackChunkName: "tree" */ './views/Tree.vue')
+    },
+    {
+      path: '/cascader',
+      name: 'cascader',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Cascader.vue')
     }
   ]
 })
