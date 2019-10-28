@@ -30,6 +30,11 @@ export default new Router({
       path: '/cascader',
       name: 'cascader',
       component: () => import(/* webpackChunkName: "tree" */ './views/Cascader.vue')
+    },
+    {
+      path: '/dialog',
+      name: 'dialog',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Dialog.vue')
     }
   ]
 })
