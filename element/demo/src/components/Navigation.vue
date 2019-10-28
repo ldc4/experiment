@@ -11,6 +11,8 @@
     <h3>Demo</h3>
     <ul>
       <li><router-link to="/tree">Tree</router-link></li>
+      <li><router-link to="/cascader">Cascader</router-link></li>
+      <li><router-link to="/dialog">Dialog</router-link></li>
     </ul>
   </div>
 </template>
