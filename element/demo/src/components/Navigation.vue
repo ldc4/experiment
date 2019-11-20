@@ -13,6 +13,7 @@
       <li><router-link to="/tree">Tree</router-link></li>
       <li><router-link to="/cascader">Cascader</router-link></li>
       <li><router-link to="/dialog">Dialog</router-link></li>
+      <li><router-link to="/table">Table</router-link></li>
     </ul>
   </div>
 </template>

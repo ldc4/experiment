@@ -35,6 +35,11 @@ export default new Router({
       path: '/dialog',
       name: 'dialog',
       component: () => import(/* webpackChunkName: "tree" */ './views/Dialog.vue')
+    },
+    {
+      path: '/table',
+      name: 'table',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Table.vue')
     }
   ]
 })
