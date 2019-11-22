@@ -162,12 +162,13 @@ export default {
         const diff = scrollTop - (this.$el.offsetTop - this.option.flexHeight)
         this.updateVisibleData(diff > 0 ? diff : 0)
       } else {
-        const scrollTop = this.$el.scrollTop
+        const scrollTop = this.$el.scrollTop <= this.contentHeight ? this.$el.scrollTop : this.contentHeight
         this.updateVisibleData(scrollTop)
       }
     },
     // 更新可视数据
     updateVisibleData(scrollTop = 0) {
+      console.log(scrollTop)
       const that = this
       const visibleHeight = this.option.visibleHeight ? this.option.visibleHeight : this.$el.clientHeight
       const flexCount = this.option.flexCount ? this.option.flexCount : this.flexCount
