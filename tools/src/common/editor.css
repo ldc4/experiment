@@ -1,0 +1,13 @@
+.editor-toolbar {
+  border: 1px solid #ccc;
+  min-height: 30px;
+}
+
+.editor-content {
+  border: 1px solid #ccc;
+  border-top: none;
+  min-height: 300px;
+  z-index: 10000;
+  padding: 10px;
+  outline: none;
+}
