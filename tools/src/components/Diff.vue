@@ -88,13 +88,15 @@ export default {
     this.display.json = display
 
     // 对比数组
-    oldArr = ['aaa', 'bbb', 'ccc']
-    newArr = ['aaa', 'ccc', 'ddd']
+    oldArr = ['aaa', 'bbb']
+    newArr = ['bbb', 'aaa']
     output = Diff.diffArrays(oldArr, newArr)
     display = this.format(output)
-    this.output.arr = output
-    this.display.arr = display
-
+    this.output.arr1 = output
+    this.display.arr1 = display
+    output = Diff.diffArrays(newArr, oldArr)
+    this.output.arr2= output
+    this.display.arr2 = display
 
     let beforeData = [{ label: 'aaa' }, { label: 'bbb' }, { label: 'ccc' }]
     let afterData = [{ label: 'aaa' }, { label: 'ccc' }, { label: 'ddd' }]
