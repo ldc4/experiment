@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     b: moduleB
   },
   state: {
+    cacheList: [],
     count: 3,
     list: [
       { name: 'weedust', value: 1 },
@@ -82,12 +83,32 @@ const { mapState, mapGetters } = Vuex;
 //   }
 // }
 
+const Item = {
+  template: `<div>{{JSON.stringify(itemData)}}<button @click="change">change</button></div>`,
+  props: ['itemData'],
+  methods: {
+    change() {
+      const { name, value, test } = this.itemData
+      this.itemData.name = name + 'hahaha'
+      this.$emit('change')
+    }
+  }
+}
+
 const Counter = {
-  template: `<div>{{ count }}-{{count2}}-{{count3}}-{{JSON.stringify(filterList)}}</div>`,
+  template: `<div>
+    <span>{{ count }}-{{count2}}-{{count3}}</span>
+    <div v-for="itemData in filterList">
+      <Item :itemData="itemData" @change="handleChange"></Item>
+    </div>
+  </div>`,
   data: function() {
     return {
       localCount: 3
     }
+  },
+  components: {
+    Item
   },
   computed: {
     ...mapState({
@@ -95,11 +116,18 @@ const Counter = {
       count2: 'count',
       count3(state) {
         return state.count + this.localCount
-      }
+      },
+      cacheList: state => state.cacheList
     }),
     ...mapGetters([
       'filterList'
     ])
+  },
+  methods: {
+    handleChange() {
+      this.cacheList = ['hahah']
+      console.log(this.cacheList)
+    }
   }
 }
 
