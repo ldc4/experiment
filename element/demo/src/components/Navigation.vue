@@ -18,6 +18,7 @@
     <h3>场景案例</h3>
     <ul>
       <li><router-link to="/virtual-tree">虚拟树</router-link></li>
+      <li><router-link to="/mention">提及组件</router-link></li>
     </ul>
   </div>
 </template>

@@ -55,6 +55,16 @@ export default new Router({
       path: '/virtual-tree',
       name: 'virtual-tree',
       component: () => import(/* webpackChunkName: "tree" */ './views/VirtualTree.vue')
+    },
+    {
+      path: '/mention',
+      name: 'mention',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Mention.vue')
+    },
+    {
+      path: '/select',
+      name: 'select',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Select.vue')
     }
   ]
 })
