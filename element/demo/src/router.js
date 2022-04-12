@@ -47,6 +47,11 @@ export default new Router({
       component: () => import(/* webpackChunkName: "tree" */ './views/Table.vue')
     },
     {
+      path: '/table2',
+      name: 'table2',
+      component: () => import(/* webpackChunkName: "tree" */ './views/Table2.vue')
+    },
+    {
       path: '/virtual-tree',
       name: 'virtual-tree',
       component: () => import(/* webpackChunkName: "tree" */ './views/VirtualTree.vue')
