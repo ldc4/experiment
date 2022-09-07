@@ -80,6 +80,53 @@ type MyExclude<T, U> = T extends U ? never : T
 
 // 7. Awaited
 
-type ExampleType = Promise<string>
+type MyAwaited<T> = T extends Promise<infer U> ? U : never;
 
-type Result = MyAwaited<ExampleType> // string
+type MyAwaited2<T> = T extends Promise<infer U> ? U extends Promise<unknown> ? MyAwaited2<U> : U : never;
+
+// type ExampleType = Promise<string>
+
+// type Result = MyAwaited2<ExampleType> // string
+
+// 8. If
+
+type If<T, A, B> = T extends true ? A : B;
+
+// type A = If<true, 'a', 'b'>  // expected to be 'a'
+// type B = If<false, 'a', 'b'> // expected to be 'b'
+
+// 9. Concat
+
+type Concat<T extends any[], U extends any[]> = [...T, ...U];
+
+// type Result = Concat<[1], [2]> // expected to be [1, 2]
+
+
+// 10. Includes
+
+type Includes<T extends any[], U> = U extends T[number] ? true : false;
+
+// type isPillarMen = Includes<['Kars', 'Esidisi', 'Wamuu', 'Santana'], 'Dios'> // expected to be `false`
+
+
+// 11. Push
+
+type Push<T extends any[], U> = [...T, U];
+
+// type Result = Push<[1, 2], '3'> // [1, 2, '3']
+
+
+// 12. Unshift
+
+type Unshift<T extends any[], U> = [U, ...T];
+
+type Result = Unshift<[1, 2], 0> // [0, 1, 2,]
+
+
+// 13. Parameters
+
+type MyParameters<T> = T extends (...args: infer Rest) => any ? [...Rest] : [];
+
+// const foo = (arg1: string, arg2: number): void => {}
+
+// type FunctionParamsType = MyParameters<typeof foo> // [arg1: string, arg2: number]
