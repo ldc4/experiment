@@ -130,3 +130,90 @@ type MyParameters<T> = T extends (...args: infer Rest) => any ? [...Rest] : [];
 // const foo = (arg1: string, arg2: number): void => {}
 
 // type FunctionParamsType = MyParameters<typeof foo> // [arg1: string, arg2: number]
+
+
+// 14. Get Return Type
+
+type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer U ? U : any;
+
+// const fn = (v: boolean) => {
+//   if (v)
+//     return 1
+//   else
+//     return 2
+// }
+
+// type a = MyReturnType<typeof fn> // should be "1 | 2"
+
+// 15. Omit
+
+type MyOmit<T, U extends keyof T> = Pick<T, Exclude<keyof T, U>>
+
+// interface Todo {
+//   title: string
+//   description: string
+//   completed: boolean
+// }
+
+// type TodoPreview = MyOmit<Todo, 'description' | 'title'>
+
+// const todo: TodoPreview = {
+//   completed: false,
+// }
+
+
+// 16. Readonly 2
+
+type MyReadonly2<T, U extends keyof T> = Readonly<Pick<T, U>> & Omit<T, U>;
+
+// interface Todo {
+//   title: string
+//   description: string
+//   completed: boolean
+// }
+
+// const todo: MyReadonly2<Todo, 'title' | 'description'> = {
+//   title: "Hey",
+//   description: "foobar",
+//   completed: false,
+// }
+
+// todo.title = "Hello" // Error: cannot reassign a readonly property
+// todo.description = "barFoo" // Error: cannot reassign a readonly property
+// todo.completed = true // OK
+
+
+// 17. Deep Readonly
+
+type DeepReadonly<T> = {
+  readonly [P in keyof T]: T[P] extends Object ? DeepReadonly<T[P]> : T[P];
+}
+
+// type X = {
+//   x: {
+//     a: 1
+//     b: 'hi'
+//   }
+//   y: 'hey'
+// }
+
+// type Expected = {
+//   readonly x: {
+//     readonly a: 1
+//     readonly b: 'hi'
+//   }
+//   readonly y: 'hey'
+// }
+
+// type Todo = DeepReadonly<X> // should be same as `Expected`
+
+
+// 18. tuple to union
+
+type TupleToUnion<T extends any[]> = T[number];
+
+type Arr = ['1', '2', '3']
+
+type Test = TupleToUnion<Arr> // expected to be '1' | '2' | '3'
+
+
